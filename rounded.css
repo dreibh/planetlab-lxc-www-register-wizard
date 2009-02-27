@@ -1,0 +1,59 @@
+
+div.rounded {
+ margin: 0pt auto;
+ width: 200px;
+ background-color: rgb(153, 170, 187);
+ font-family: Georgia;
+ font-variant: small-caps;
+ font-weight: bold;
+ font-size: 2em;
+ line-height: 4em;
+ font-size-adjust: none;
+ font-stretch: normal;
+ color: rgb(255, 255, 255);
+ text-align: center
+}
+
+div.plroundedconfirm {
+  margin: 0pt auto;
+  width: 700px;
+  background-color: #ddeeee;
+  font-family: Georgia;
+  /*font-variant: small-caps;*/
+  /*font-weight: bold;*/
+  /*font-size: 2em;*/
+  /*line-height: 2em;*/
+  font-size-adjust: none;
+  font-stretch: normal;
+  color: rgb(0, 0, 0);
+  text-align: left; 
+ }
+
+div.plroundedupdate {
+  margin: 0pt auto;
+  width: 700px;
+  background-color: #ddeedd;
+  font-family: Georgia;
+  /*font-variant: small-caps;*/
+  /*font-weight: bold;*/
+  /*font-size: 2em;*/
+  /*line-height: 2em;*/
+  font-size-adjust: none;
+  font-stretch: normal;
+  color: rgb(0, 0, 0);
+  text-align: left; 
+ }
+
+div.plroundedwhite {
+  margin: 5px auto;
+  width: 670px;
+  background-color: #ffffff;
+  /*font-variant: small-caps;*/
+  /*font-weight: bold;*/
+  /*font-size: 2em;*/
+  /*line-height: 2em;*/
+  font-size-adjust: none;
+  font-stretch: normal;
+  color: rgb(0, 0, 0);
+  text-align: left; 
+ }
