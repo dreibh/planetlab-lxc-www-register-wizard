@@ -11,13 +11,7 @@
 			</span>
 		</dd>
 	<?php elseif ( $node['boot_state'] == "rins" || $node['boot_state'] == "reinstall" ): ?>
-	<dt>If Reboot succeeds,</dt><dd>
-			your machine will reboot, install the bootstrap image, and 
-			contacted PLC.  Finally, the boot state will be updated to 'boot'.
-			<br>
-			Continue using the 'Reload' button to check whether the node has
-			completed its installation.
-	</dd>
+<?php if ( isset($error) && ! empty($error) ): ?>
 	<dt>If Reboot fails,</dt><dd>
 			there will be an error displayed that will assist you in
 			diagnosing the error.  Otherwise, please double check the
@@ -25,16 +19,30 @@
 			PCU manually (using it's web or ssh interface).
 			<br>
 			To try the test again, use 'Test Reboot'.<br>
+			If you need help diagnosing the problem, please contact 
+			<a href="mailto:support@planet-lab.org?subject=Reboot Failed: <?= $error ?>">PlanetLab Support</a>.
 	</dd>
+		<dt> <span class='error'> Reboot Failure: </span> </dt>
+		<dd> <span class='error'> <?= $error ?> </span> </dd>
+	<?php else: ?>
+	<dt>If Reboot succeeds,</dt><dd>
+			your machine will reboot, install the bootstrap image, and 
+			contacted PLC.  Finally, the boot state will be updated to 'boot'.
+			<br>
+			Continue using the 'Reload' button to check whether the node has
+			completed its installation.
+	</dd>
+		<dt> Reboot without error: </dt>
+		<dd> No errors were reported for your reboot.  Please double check by
+		confirming at the console.  If the reboot failed, please report this
+		to <a href="mailto:support@planet-lab.org?subject=No error for failed PCU reboot">PlanetLab Feedback</a>.
+		</dd>
+<?php endif; ?>
 	<?php else: ?>
 	<dt><b>Success!!</b></dt><dd>
 			The installation is complete; your machine has reached the final
 			'boot' state.  You can continue to the final stage.</dd>
 	<?php endif; ?>
-<?php if ( isset($error) && ! empty($error) ): ?>
-		<dt> <span class='error'> Reboot Failure: </span> </dt>
-		<dd> <span class='error'> <?= $error ?> </span> </dd>
-<?php endif; ?>
 </dl>
 
 <table><tbody>

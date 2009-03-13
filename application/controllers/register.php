@@ -36,6 +36,7 @@ class Register extends Controller {
 		
 		$this->validation->set_error_delimiters('<span class="error">', '</span>');
 
+		$rules['model']		= "trim|required";
 		$rules['hostname']  = "trim|required";
 		$rules['ip'] 		= "trim|required|valid_ip";
 		$rules['username']  = "trim";
@@ -43,6 +44,7 @@ class Register extends Controller {
 		$rules['notes'] 	= "trim";
 		$this->validation->set_rules($rules);
 
+		$fields['model']  = "Model";
 		$fields['hostname']  = "Hostname";
 		$fields['ip'] 		= "IP Address";
 		$fields['username']  = "Username";
@@ -53,8 +55,11 @@ class Register extends Controller {
 		$data = array();
 		if ($this->validation->run() == TRUE)
 		{
-			/* b/c the submit is valid, it doesn't matter if pcu_register is set */
-			$this->pcu_id = $this->add_pcu($data);
+		    if ($this->validation->model != "none-selected" )
+			{
+				/* b/c the submit is valid, it doesn't matter if pcu_register is set */
+				$this->pcu_id = $this->add_pcu($data);
+			}
 		}
 		$data = $this->get_stage1_data($person, $data);
 		$data['stage'] = 1;
