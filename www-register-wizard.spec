@@ -4,7 +4,7 @@
 %define url $URL: https://svn.planet-lab.org/svn/www-register-wizard/trunk/www-register-wizard.spec $
 
 %define name www-register-wizard
-%define version 4.3
+%define version 4.2
 %define taglevel 0
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
