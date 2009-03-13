@@ -29,7 +29,7 @@ function updateStaticFields()
 		<table border=0 cellpadding=3>
 			<tbody>
 				<tr><td colspan='2'>
-Please review the information below, and if it is correct, the Proceed to then
+Please review the information below, and if it is correct, then Proceed to the
 next stage.  Otherwise, please Update the information as appropriate.
 				</td></tr>
 				<tr><td></td>
