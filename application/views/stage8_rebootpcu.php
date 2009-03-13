@@ -1,21 +1,47 @@
 <div class="plroundedupdate">
 <div class="plroundedwhite">
 <h3>Confirm Reboot Node With PCU</h3>
+<dl>
+	<?php if ( $node['boot_state'] == "disable" ): ?>
+	<dt>Step 1</dt>
+		<dd>
+			<span class='error'>
+			Use the 'Test Reboot' button.  This will set the boot state to 'rins' and 
+			attempt to reboot your machine using the registered PCU.
+			</span>
+		</dd>
+	<?php elseif ( $node['boot_state'] == "rins" || $node['boot_state'] == "reinstall" ): ?>
+	<dt>If Reboot succeeds,</dt><dd>
+			your machine will reboot, install the bootstrap image, and 
+			contacted PLC.  Finally, the boot state will be updated to 'boot'.
+			<br>
+			Continue using the 'Reload' button to check whether the node has
+			completed its installation.
+	</dd>
+	<dt>If Reboot fails,</dt><dd>
+			there will be an error displayed that will assist you in
+			diagnosing the error.  Otherwise, please double check the
+			registered information for the PCU, and that you can operate the
+			PCU manually (using it's web or ssh interface).
+			<br>
+			To try the test again, use 'Test Reboot'.<br>
+	</dd>
+	<?php else: ?>
+	<dt><b>Success!!</b></dt><dd>
+			The installation is complete; your machine has reached the final
+			'boot' state.  You can continue to the final stage.</dd>
+	<?php endif; ?>
+</dl>
+
 <table><tbody>
 	<tr><th>Site: </th><td> <a href='/db/sites/index.php?id=<?= $site_id ?>'><?= $site['name'] ?></a></td></tr>
 	<tr><th>Hostname: </th><td nowrap><?= $node['hostname'] ?></td></tr>
 	<tr><th>Boot State: </th><td><?= $node['boot_state'] ?> </td>
 		<td>
 		<?php if ( $node['boot_state'] == "disable" ): ?>
-			<span class='error'> Begin by trying the 'Test Reboot' button.  
-				This will set the boot state to 'rins' and attempt to reboot your machine 
-				using the registered PCU.
-			</span>
-			If successful, your machine will reboot, install the bootstrap image, and 
-			contacted PLC.  Finally, the boot state will be updated to 'boot'.
+			<span class='error'> Start with the 'Test Reboot' button.</span>
 		<?php elseif ( $node['boot_state'] == "rins" ): ?>
-			<br>
-			'Test Reboot' to try again.<br>
+			<br>'Test Reboot' to start again.<br>
 			'Reload' to Reload this page.
 		<?php else: ?>
 			<b>Success!!</b> Your machine has booted and contacted PLC.
