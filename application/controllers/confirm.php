@@ -166,10 +166,11 @@ class Confirm extends Controller {
 		$hostname = $data['node_id'];
 		$api->UpdateNode( $hostname, array( "boot_state" => 'rins') );
 		$ret = $api->RebootNodeWithPCU( $hostname );
-		if ( $ret != 0 ) {
+		if ( "$ret" != "0" ) {
+			$data['error'] = $ret;
+		} else {
 			$data['error'] = $api->error();
 		}
-		$data['error'] = $api->error();
 	}
 }
 ?>

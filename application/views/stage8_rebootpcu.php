@@ -31,6 +31,10 @@
 			The installation is complete; your machine has reached the final
 			'boot' state.  You can continue to the final stage.</dd>
 	<?php endif; ?>
+<?php if ( isset($error) && ! empty($error) ): ?>
+		<dt> <span class='error'> Reboot Failure: </span> </dt>
+		<dd> <span class='error'> <?= $error ?> </span> </dd>
+<?php endif; ?>
 </dl>
 
 <table><tbody>
@@ -52,13 +56,6 @@
 	<tr><th>Model: </th><td><?= $node['model'] ?></td></tr>
 	<tr><th>Version: </th><td nowrap='1'><?= $node['version'] ?></td></tr>
 	<tr><th>Last Contact: </th><td><?= $last_contact_str ?></td></tr>
-<?php if ( isset($error) && ! empty($error) ): ?>
-	<tr>
-		<td colspan=2>
-			<span class='error'> <?= $error ?> </span>
-		</td>
-	</tr>
-<?php endif; ?>
 	<tr>
 		<td>
 		</td>
