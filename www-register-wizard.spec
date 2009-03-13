@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.2
-%define taglevel 0
+%define taglevel 1
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,5 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Fri Mar 13 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-1
+- enforced model check on add-pcu.
+- display clearer messages on stage 8, regarding pcu success or failure.
+
 * Fri Feb 27 2009 Stephen Soltesz <soltesz@cs.princeton.edu> -
 - Initial creation of spec file.
