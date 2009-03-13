@@ -82,7 +82,7 @@
 		<?php else: ?>
 				<input type='submit' disabled value='Continue'>
 		<?php endif; ?>
-				<input type='submit' value='Debug Continue'>
+				<!--input type='submit' value='Debug Continue'-->
 		</form>
 </tbody></table><br />
 </div>
