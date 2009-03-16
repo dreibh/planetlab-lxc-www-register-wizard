@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.2
-%define taglevel 1
+%define taglevel 2
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,11 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Mon Mar 16 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-2
+- correct typos.
+- remove extra print statements.
+- remove 'debug' continue buttons.
+
 * Fri Mar 13 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-1
 - enforced model check on add-pcu.
 - display clearer messages on stage 8, regarding pcu success or failure.
