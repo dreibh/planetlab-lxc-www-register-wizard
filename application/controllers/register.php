@@ -323,7 +323,6 @@ class Register extends Controller {
 	function add_node(&$data)
 	{
 		global $api, $plc;
-		print "Adding Node\n<br>";
 		$hostname = trim($_REQUEST['hostname']);
 		$model= trim($_REQUEST['model']);
 		$method = trim($_REQUEST['method']);
@@ -690,7 +689,6 @@ class Register extends Controller {
 		}
 		$data['node'] = $this->getnode($data['node_id']);
 		$data['site'] = $this->getsite($data['site_id']);
-		/*print "SITENAME: " . $data['site']['login_base'] . "<BR>";*/
 		return $data;
 	}
 
