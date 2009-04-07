@@ -55,7 +55,7 @@ class Register extends Controller {
 		$data = array();
 		if ($this->validation->run() == TRUE)
 		{
-		    if ($this->validation->model != "none-selected" )
+		    	if ($this->validation->model != "none-selected" )
 			{
 				/* b/c the submit is valid, it doesn't matter if pcu_register is set */
 				$this->pcu_id = $this->add_pcu($data);
@@ -323,6 +323,7 @@ class Register extends Controller {
 	function add_node(&$data)
 	{
 		global $api, $plc;
+		print "Adding Node\n<br>";
 		$hostname = trim($_REQUEST['hostname']);
 		$model= trim($_REQUEST['model']);
 		$method = trim($_REQUEST['method']);
@@ -420,7 +421,12 @@ class Register extends Controller {
 	{
 		global $api, $plc;
 		$plc_node_list = $api->GetNodes(array('site_id' => intval($site_id) ));
-		return PlcObject::constructList('Node', $plc_node_list);
+		$ret = array();
+		foreach ($plc_node_list as $plc_node)
+		{
+			$ret[] = new Node($plc_node, True);
+		}
+		return $ret;
 	}
 
 	function getsite($site_id)
@@ -597,7 +603,7 @@ class Register extends Controller {
 		$api_node_list = $api->GetNodes($node_id);
 		if ( count($api_node_list) > 0 )
 		{
-			$node_obj = new Node($api_node_list[0]);
+			$node_obj = new Node($api_node_list[0], True);
 		} else {
 			print "broken!!!";
 			exit (1);
@@ -689,6 +695,7 @@ class Register extends Controller {
 		}
 		$data['node'] = $this->getnode($data['node_id']);
 		$data['site'] = $this->getsite($data['site_id']);
+		/*print "SITENAME: " . $data['site']['login_base'] . "<BR>";*/
 		return $data;
 	}
 
@@ -709,7 +716,7 @@ class Register extends Controller {
 		$plc_node_list = $api->GetNodes(array('node_id' => intval($node_id) ));
 		if ( count($plc_node_list) > 0 )
 		{
-			return new Node($plc_node_list[0]);
+			return new Node($plc_node_list[0], True);
 		} else {
 			return NULL;
 		}
