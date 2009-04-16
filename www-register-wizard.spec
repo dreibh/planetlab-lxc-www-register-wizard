@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.2
-%define taglevel 2
+%define taglevel 3
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Thu Apr 16 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-3
+- bring up to date.
+
 * Mon Mar 16 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-2
 - correct typos.
 - remove extra print statements.
