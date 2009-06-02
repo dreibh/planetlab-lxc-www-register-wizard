@@ -2,15 +2,15 @@
 <div class="plroundedwhite">
 <h3>Confirm Reboot Node With PCU</h3>
 <dl>
-	<?php if ( $node['boot_state'] == "disable" ): ?>
+	<?php if ( $node['boot_state'] == "disabled" ): ?>
 	<dt>Step 1</dt>
 		<dd>
 			<span class='error'>
-			Use the 'Test Reboot' button.  This will set the boot state to 'rins' and 
+			Use the 'Test Reboot' button.  This will set the boot state to 'reinstall' and 
 			attempt to reboot your machine using the registered PCU.
 			</span>
 		</dd>
-	<?php elseif ( $node['boot_state'] == "rins" || $node['boot_state'] == "reinstall" ): ?>
+	<?php elseif ( $node['boot_state'] == "reinstall" ): ?>
 <?php if ( isset($error) && ! empty($error) ): ?>
 	<dt>If Reboot fails,</dt><dd>
 			there will be an error displayed that will assist you in
@@ -52,7 +52,7 @@
 		<td>
 		<?php if ( $node['boot_state'] == "disable" ): ?>
 			<span class='error'> Start with the 'Test Reboot' button.</span>
-		<?php elseif ( $node['boot_state'] == "rins" ): ?>
+		<?php elseif ( $node['boot_state'] == "reinstall" ): ?>
 			<br>'Test Reboot' to start again.<br>
 			'Reload' to Reload this page.
 		<?php else: ?>

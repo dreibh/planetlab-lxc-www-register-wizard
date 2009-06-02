@@ -51,6 +51,8 @@
 							<td>
 							</td>
 						</tr>
+			<?php else: ?>
+					<tr><th>ERROR:</th><td>No sites returned...</td></tr>
 			<?php endif; ?>
 					<tr><th>Model: </th>
 						<td>

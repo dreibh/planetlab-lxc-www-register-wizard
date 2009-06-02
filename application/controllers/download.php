@@ -11,7 +11,6 @@ include 'plc_header.php';
 
 // Common functions
 require_once 'plc_functions.php';
-require_once 'plc_sorts.php';
 include 'plc_objects.php';
 
 
@@ -108,7 +107,7 @@ class Download extends Controller {
 					$basename=PLC_NAME."-BootCD.usb";
 				}
 
-				$api->UpdateNode( $hostname, array( "boot_state" => 'disable',
+				$api->UpdateNode( $hostname, array( "boot_state" => 'disabled',
 													"version" => $this->get_bootcd_version() ) );
 				/* exits on success */
 				$success = $this->deliver_bootmedium($node_id, $boot_action, $basename);
@@ -140,7 +139,7 @@ class Download extends Controller {
 				}
 
 				$hostname= $node_detail['hostname'];
-				$return= $api->GetNodeNetworks( array( "node_id" => $node_id ), NULL );
+				$return= $api->GetInterfaces( array( "node_id" => $node_id ), NULL );
 		   
 				$can_gen_config= 1;
 				$data['has_primary']= 0;
@@ -216,7 +215,7 @@ class Download extends Controller {
 					}	 
 					if ($action != 'download-node-floppy')
 					{
-						$api->UpdateNode( $hostname, array( "boot_state" => 'disable',
+						$api->UpdateNode( $hostname, array( "boot_state" => 'disabled',
 										  "version" => $this->get_bootcd_version() ) );
 					}
 					/* exits on success */

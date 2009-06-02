@@ -11,7 +11,6 @@ include 'plc_header.php';
 
 // Common functions
 require_once 'plc_functions.php';
-require_once 'plc_sorts.php';
 include 'plc_objects.php';
 
 
@@ -164,12 +163,12 @@ class Confirm extends Controller {
 	{
 		global $api, $plc;
 		$hostname = $data['node_id'];
-		$api->UpdateNode( $hostname, array( "boot_state" => 'rins') );
+		$api->UpdateNode( $hostname, array( "boot_state" => 'reinstall') );
 		$ret = $api->RebootNodeWithPCU( $hostname );
 		if ( "$ret" != "0" ) {
-			$data['error'] = $ret;
-		} else {
 			$data['error'] = $api->error();
+		} else {
+			$data['error'] = $ret;
 		}
 	}
 }

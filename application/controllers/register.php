@@ -11,7 +11,7 @@ include 'plc_header.php';
 
 // Common functions
 require_once 'plc_functions.php';
-require_once 'plc_sorts.php';
+//require_once 'plc_sorts.php';
 include 'plc_objects.php';
 
 
@@ -117,11 +117,12 @@ class Register extends Controller {
 		global $api, $plc;
 		// get sites depending on role and sites associated.
 		if( $person->isAdmin() ) {
-			$site_info= $api->GetSites( NULL, array( "name", "site_id", "login_base" ) );
+			$site_info= $api->GetSites(array('peer_id' => NULL,'-SORT'=>'name'), 
+										array( "name", "site_id", "login_base" ) );
 		} else {
 			$site_info= $api->GetSites( $person->getSites(), array( "name", "site_id", "login_base" ) );
 		}
-		sort_sites( $site_info );
+		//sort_sites( $site_info );
 		return $site_info;
 	}
 
@@ -385,8 +386,8 @@ class Register extends Controller {
 				}
 			}
 
-			$nodenetwork_id= $api->AddNodeNetwork( $node_id, $optional_vals);
-			if( $nodenetwork_id <= 0 ) {
+			$interface_id= $api->AddInterface( $node_id, $optional_vals);
+			if( $interface_id <= 0 ) {
 				$data['error'] = $api->error();
 				print $data['error'];
 			}
@@ -480,14 +481,20 @@ class Register extends Controller {
 			print $this->validation->error_string . "<br>";
 		}
 
-
 		$data['node'] = $this->getnode($data['node_id']);
-		$api_pcus = $api->GetPCUs($data['node']->pcu_ids);
-		$pcu = $api_pcus[0];
+		if ( sizeof($data['node']->pcu_ids) == 0)
+		{
+			$data['pcu_assigned'] = False;
+			$data['pcu_port'] = -1;
+		} else {
+			$data['pcu_assigned'] = True;
+			$api_pcus = $api->GetPCUs($data['node']->pcu_ids);
+			$pcu = $api_pcus[0];
+			# NOTE: find index of node id, then pull out that index of
+			$index = array_search($data['node_id'], $pcu['node_ids']);
+			$data['pcu_port'] = $pcu['ports'][$index];
+		}
 
-		# NOTE: find index of node id, then pull out that index of
-		$index = array_search($data['node_id'], $pcu['node_ids']);
-		$data['pcu_port'] = $pcu['ports'][$index];
 		$data['stage'] = 4.5;
 		#$data = $this->get_stage4_data($person, $data);
 		$this->load->view('header', $data);
@@ -673,7 +680,7 @@ class Register extends Controller {
 			if ( count($optional_vals) > 0 )
 			{
 				print_r($optional_vals);
-				$ret = $api->UpdateNodeNetwork( $node_obj->nodenetwork_id, $optional_vals);
+				$ret = $api->UpdateInterface( $node_obj->interface_id, $optional_vals);
 				if( $ret <= 0 ) {
 					$data['error'] = $api->error();
 					print $data['error'];

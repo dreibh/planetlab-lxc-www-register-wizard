@@ -16,29 +16,30 @@ function updateContinueEnabled()
 	<table style="font-size: 100%">
 	<tr>
 	  <td><input type='radio' name='action' value='download-node-iso' onchange='updateContinueEnabled();'></td>
-	  <td><img src="/misc/all-in-one-cd.png"/></td><td><b>All-In-One ISO image</b>.  
+	  <td><img src="/registerwizard/images/all-in-one-cd.png"/></td><td><b>All-In-One ISO image</b>.  
 	  		Includes plnode.txt.  No additional formatting required.</td>
 	</tr>
 	<tr>
 	  <td><input type='radio' name='action' value='download-node-usb' onchange='updateContinueEnabled();'></td>
-	  <td><img src="/misc/all-in-one-usb.png" /></td><td><b>All-In-One USB image</b>. Includes plnode.txt, and filesystem only.  Requires additional USB stick formatting.**</td>
+	  <td><img src="/registerwizard/images/all-in-one-usb.png" /></td><td><b>All-In-One USB image</b>. Includes plnode.txt, and filesystem only.  Requires additional USB stick formatting.**</td>
 	</tr>
 	<tr>
 	  <td><input type='radio' name='action' value='download-node-usb-partition' onchange='updateContinueEnabled();'></td>
-	  <td><img src="/misc/all-in-one-usb.png" /></td><td><b>All-In-One partitioned, USB image</b>.  Includes, plnode.txt, MBR, partition table, and filesystem.  No additional formatting required.**</td>
+	  <td><img src="/registerwizard/images/all-in-one-usb.png" /></td><td><b>All-In-One partitioned, USB image</b>.  Includes, plnode.txt, MBR, partition table, and filesystem.  No additional formatting required.**</td>
 	</tr>
-	<tr>
+	<!--tr>
 	  <td><input type='radio' name='action' value='download-node-floppy-with-iso' onchange='updateContinueEnabled();'></td>
 	  <td><img src="/misc/generic-cd-and-floppy.png" /></td><td><b>Generic CD</b>, and <b>plnode.txt</b> on Floppy</td>
 	</tr>
 	<tr>
 	  <td><input type='radio' name='action' value='download-node-floppy-with-usb' onchange='updateContinueEnabled();'></td>
 	  <td><img src="/misc/generic-usb-and-floppy.png" /></td><td><b>Generic USB</b>, and <b>plnode.txt</b> on Floppy</td>
-	</tr>
+	</tr-->
 	</table>
 
+	<p></p>
 	<p>Additional directions are provided on the next page.</p>
-	<p>NOTE:  ** USB images are not guaranteed to work on all systems.</p>
+	<p>NOTE:  ** USB images are not guaranteed to work on all systems or with all USB memory sticks.</p>
 </div>
 	<center>
 	<input type=submit name='download_bootimage' disabled value='Select'> 
