@@ -26,8 +26,8 @@ URL: %(echo %{url} | cut -d ' ' -f 2)
 
 # We use set everywhere
 #Requires: httpd >= 2.0
-Requires: PLCWWW >= 4.2
-Requires: PLCAPI >= 4.2
+Requires: PLCWWW >= 4.3
+Requires: PLCAPI >= 4.3
 
 %description
 
