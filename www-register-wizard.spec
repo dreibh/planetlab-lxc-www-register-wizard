@@ -4,8 +4,8 @@
 %define url $URL: https://svn.planet-lab.org/svn/www-register-wizard/trunk/www-register-wizard.spec $
 
 %define name www-register-wizard
-%define version 4.2
-%define taglevel 4
+%define version 4.3
+%define taglevel 0
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Wed Jun 03 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.3-0
+- update version number to match 4.3 for consistency and clarity.
+
 * Wed Jun 03 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.2-4
 - changes to work with 4.3... probably need to update the version information to
 - avoid confusion.
