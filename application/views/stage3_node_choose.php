@@ -1,13 +1,6 @@
 <?php
 if( isset($errors) && count($errors) > 0 )
 {
-  print( "<p><strong>The following errors occured:</strong>" );
-  print( "<font color='red' size='-1'><ul>\n" );
-  foreach( $errors as $err )
-    {
-      print( "<li>$err\n" );
-    }
-  print( "</ul></font>\n" );
 }
 ?>
 <script language="javascript">
@@ -27,8 +20,9 @@ function updateStaticFields()
 <?= form_open("register/stage4_confirmnode/$pcu_id/$site_id") ?>
 		<table border=0 cellpadding=3>
 			<tbody>
+		<?php if ( !empty($node_list)  && !isset($error) ): ?>
 				<tr><td colspan='2'><h3>Choose a Node to Associate with PCU</h3></td></tr>
-		<?php if ( !empty($node_list) ): ?>
+
 					<tr><th>Node Name: </th><td>
 							<select name='node_id'>
 									<option value='0'>--</option>
@@ -47,6 +41,11 @@ function updateStaticFields()
 					</td>
 				</tr>
 					</tr>
+		<?php else: ?>
+				  <p><strong>The following errors occured:</strong>
+				  <font color='red' size='-1'><ul>
+					  <li><?= $error ?></li>
+					</ul></font>
 		<?php endif; ?>
 			</tbody>
 			</table>
@@ -56,7 +55,7 @@ function updateStaticFields()
 <div class="plroundedupdate">
 		<table border=0 cellpadding=3>
 			<tbody>
-<?php if ( !isset($node_id) || $node_id == 0 ): ?>
+<?php if ( !isset($node_id) || $node_id == 0 || !isset($interface_id) || $interface_id == 0): ?>
 <?= form_open("register/stage3_addnode/$pcu_id/$site_id", array('name'=>'fm', 'method'=>'post')) ?>
 		<tr><td colspan='2'><h3>Or, Add a Node</h3></td></tr>
 					<tr><th>Site: </th><td><?= $site['name'] ?></td>

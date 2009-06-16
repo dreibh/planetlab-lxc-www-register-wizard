@@ -324,7 +324,6 @@ class Register extends Controller {
 	function add_node(&$data)
 	{
 		global $api, $plc;
-		print "Adding Node\n<br>";
 		$hostname = trim($_REQUEST['hostname']);
 		$model= trim($_REQUEST['model']);
 		$method = trim($_REQUEST['method']);
@@ -361,10 +360,16 @@ class Register extends Controller {
 			$optional_vals= array( "hostname"=>$hostname, "model"=>$model );
 
 			$site_id= $data['site_id'];
-			$node_id= $api->AddNode( intval( $site_id ), $optional_vals );
-			if( $node_id <= 0 ) {
-				$data['error'] = $api->error();
-				print $data['error'];
+			// Try to get node in case this is from an error:
+			$nodes = $api->GetNodes($optional_vals);
+			if ( count($nodes) > 0 ) {
+				$node_id= $nodes[0]['node_id'];
+			} else {
+				$node_id= $api->AddNode( intval( $site_id ), $optional_vals );
+				if( $node_id <= 0 ) {
+					$data['error'] = $api->error();
+					print $data['error'];
+				}
 			}
 
 			// now, try to add the network.
@@ -392,18 +397,33 @@ class Register extends Controller {
 				print $data['error'];
 			}
 
-			$success = $api->AddNodeToPCU( $node_id, $data['pcu_id'], 1);
-			if( !isset($success) || $success <= 0 ) {
-				$data['error'] = $api->error();
-				print $data['error'];
+			$pcus = $api->GetPCUs(array('pcu_id' => $data['pcu_id']));
+			if ( count($pcus) > 0 )
+			{
+				$pcu = $pcus[0];
+				# if $node_id in $pcu['node_ids']
+				if ( ! in_array( $node_id , $pcu['node_ids'] ) )
+				{
+				    $success = $api->AddNodeToPCU( $node_id, $data['pcu_id'], 1);
+				    if( !isset($success) || $success <= 0 ) {
+					    $data['error'] = $api->error();
+					    print $data['error'];
+				    }
+				   
+				}
 			}
+			$data['interface_id'] = $interface_id;
+			$data['node_id'] = $node_id;
+			if ( isset($errors) ) { $data['errors'] = $errors; }
+			return $node_id;
+
+		} else {
+		    $data['error'] = $errors[0];
+			return 0;
 		}
 
 
-		$data['node_id'] = $node_id;
-		if ( isset($errors) ) { $data['errors'] = $errors; }
 		
-		return $node_id;
 	}
 
 	function get_stage3_data($person, $data=NULL)
