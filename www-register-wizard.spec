@@ -60,6 +60,10 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Tue Apr 13 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-2
+- upgrade to codeigniter 1.7.2 for php-5.3 & f12
+- enable rewrite_short_tags to preserve support for <?= ?> tag
+
 * Thu Jul 02 2009 Stephen Soltesz <soltesz@cs.princeton.edu> - www-register-wizard-4.3-1
 - better error handling on updating node information.
 
