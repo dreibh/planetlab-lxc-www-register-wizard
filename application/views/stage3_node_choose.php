@@ -20,7 +20,13 @@ function updateStaticFields()
 <?= form_open("register/stage4_confirmnode/$pcu_id/$site_id") ?>
 		<table border=0 cellpadding=3>
 			<tbody>
-		<?php if ( !empty($node_list)  && !isset($error) ): ?>
+
+		<?php if ( isset($error) ): ?>
+              <p><strong>The following errors occured:</strong>
+              <font color='red' size='-1'><ul>
+              		<li><?php echo $error ?></li>
+              </ul></font>
+        <?php else: ?>
 				<tr><td colspan='2'><h3>Choose a Node to Associate with PCU</h3></td></tr>
 
 					<tr><th>Node Name: </th><td>
@@ -41,11 +47,6 @@ function updateStaticFields()
 					</td>
 				</tr>
 					</tr>
-		<?php else: ?>
-				  <p><strong>The following errors occured:</strong>
-				  <font color='red' size='-1'><ul>
-					  <li><?= $error ?></li>
-					</ul></font>
 		<?php endif; ?>
 			</tbody>
 			</table>

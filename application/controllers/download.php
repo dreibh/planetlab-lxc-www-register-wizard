@@ -260,7 +260,7 @@ class Download extends Controller {
 	function deliver_bootmedium($node_id, $action, $filename)
 	{
 		global $api;
-		ini_set("memory_limit","300M");
+		ini_set("memory_limit","450M");
 		$options = array();
 		switch ($action) {
 			case "node-usb-partition":
