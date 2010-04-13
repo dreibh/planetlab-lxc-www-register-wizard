@@ -11,6 +11,7 @@ include 'plc_header.php';
 
 // Common functions
 require_once 'plc_functions.php';
+require_once 'plc_config.php';
 include 'plc_objects.php';
 
 
@@ -250,7 +251,16 @@ class Download extends Controller {
 	}
 	function get_bootcd_version()
 	{
-		$BOOTCD="/usr/share/bootcd";
+		// pick default bootcd flavors. need more flexibility
+		// TODO: find a way to handle 32/64 bit.
+		if ( defined("PLC_FLAVOUR_NODE_PLDISTRO") )
+		{
+			// This approach only works for 5.0
+			$BOOTCD = "/usr/share/bootcd-" . PLC_FLAVOUR_NODE_PLDISTRO . "-" . PLC_FLAVOUR_NODE_FCDISTRO . "-" . PLC_FLAVOUR_NODE_ARCH;
+		} else {
+			$BOOTCD = exec ("ls -d /usr/share/bootcd*");
+		}
+
 		$BOOTCDVERSION="$BOOTCD/build/version.txt";
 		$version = trim(file_get_contents($BOOTCDVERSION));
 		$bootcd_version = PLC_NAME . "-BootCD-".$version;
