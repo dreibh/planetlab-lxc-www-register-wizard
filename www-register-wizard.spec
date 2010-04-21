@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.3
-%define taglevel 2
+%define taglevel 3
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,10 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Wed Apr 21 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-3
+- previous tag had gone bad
+- + stephen's tweaks for f12
+
 * Tue Apr 13 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-2
 - upgrade to codeigniter 1.7.2 for php-5.3 & f12
 - enable rewrite_short_tags to preserve support for <?= ?> tag
