@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.3
-%define taglevel 1
+%define taglevel 2
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
