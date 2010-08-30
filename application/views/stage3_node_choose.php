@@ -4,9 +4,18 @@ if( isset($errors) && count($errors) > 0 )
 }
 ?>
 <script language="javascript">
-function updateStaticFields()
-{
-  var is_dhcp= document.fm.method[0].checked;
+function initNodeTypeFields() {
+  var regular=document.getElementById("regular_checked");
+  var reservable=document.getElementById("reservable_checked");
+  if ( regular.checked || reservable.checked) return;
+  regular.checked=true;
+}
+function updateMethodFields() {
+  var dhcp=document.getElementById("dhcp_checked");
+  var static=document.getElementById("static_checked");
+  // set dhcp as default
+  if ( ! dhcp.checked && ! static.checked) dhcp.checked=true;
+  var is_dhcp=dhcp.checked;
 
   document.fm.netmask.disabled= is_dhcp;
   document.fm.network.disabled= is_dhcp;
@@ -62,30 +71,42 @@ function updateStaticFields()
 					<tr><th>Site: </th><td><?= $site['name'] ?></td>
 					</tr>
 				<tr>
-					<th width=200>Hostname:</td>
+					<th width=200>Hostname</td>
 					<td><input type="text" name="hostname" value="<?= $this->validation->hostname ?>" 
 								size="40" maxlength="256">
 						<?= ( $this->disp_errors ? $this->validation->hostname_error : "")  ?>
 					</td>
 				</tr>
 				<tr>
-					<th>Model:</td>
+					<th valign='top' width="200">Node Type</th>
+					<td>
+						<input type="radio" name="node_type" value="regular" id="regular_checked"
+						<?= ( $this->validation->node_type == 'regular' ? "checked" : "" ) ?>>regular 
+						<input type="radio" name="node_type" value="reservable" id="reservable_checked"
+						<?= ( $this->validation->node_type == 'reservable' ? "checked" : "" ) ?>>reservable 
+					</td>
+				</tr>
+				<tr>
+					<th>Model</td>
 					<td>
 						<input type="text" name="model" value="<?= $this->validation->model ?>" 
 								size="40" maxlength="256">
 						<?= ( $this->disp_errors ? $this->validation->model_error : "")  ?>
 					</td>
 				</tr>
+
+
+
 				<tr>
-					<td> <b>Network Settings</b> </td>
+					<td colspan=2> <h3>Network Settings</h3> </td>
 				</tr>
 
 				<tr>
 					<th valign='top' width="200">Addressing Method</th>
 					<td>
-						<input type="radio" name="method" value="dhcp" onChange='updateStaticFields()'
+						<input type="radio" name="method" value="dhcp" id="dhcp_checked" onChange='updateMethodFields()'
 						<?= ( $this->validation->method == 'dhcp' ? "checked" : "" ) ?>>DHCP 
-						<input type="radio" name="method" value="static" onChange='updateStaticFields()'
+						<input type="radio" name="method" value="static" id='static_checked' onChange='updateMethodFields()'
 						<?= ( $this->validation->method == 'static' ? "checked" : "" ) ?>>Static 
 					</td>
 				</tr>
@@ -166,5 +187,6 @@ function updateStaticFields()
 	
 	</form>
 <script language="javascript">
-updateStaticFields();
+initNodeTypeFields();
+updateMethodFields();
 </script>

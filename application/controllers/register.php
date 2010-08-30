@@ -245,8 +245,9 @@ class Register extends Controller {
 
 		if ( isset($_REQUEST['pcu_proceed']) ) {
 			$rules['hostname']  = "";
+			$rules['node_type']     = 'regular';
 			$rules['model']  	= "";
-			$rules['method']  	= "";
+			$rules['method']  	= "dhcp";
 			$rules['ip'] 		= "";
 			$rules['netmask']  = "";
 			$rules['network']  = "";
@@ -256,6 +257,7 @@ class Register extends Controller {
 			$rules['dns2']  = "";
 			$this->validation->set_rules($rules);
 			$fields['hostname']  = "Hostname";
+			$fields['node_type']	= "Node Type";
 			$fields['model']	= "Model";
 			$fields['method']	= "Method";
 			$fields['ip']		= "IP Address";
@@ -325,6 +327,7 @@ class Register extends Controller {
 	{
 		global $api, $plc;
 		$hostname = trim($_REQUEST['hostname']);
+		$node_type = trim($_REQUEST['node_type']);
 		$model= trim($_REQUEST['model']);
 		$method = trim($_REQUEST['method']);
 		$ip = trim($_REQUEST['ip']);
@@ -357,7 +360,7 @@ class Register extends Controller {
 		if( !isset($errors) || count($errors) == 0 )
 		{
 			// add new node and its network
-			$optional_vals= array( "hostname"=>$hostname, "model"=>$model );
+		  $optional_vals= array( 'hostname'=>$hostname, 'node_type'=>$node_type, 'model'=>$model );
 
 			$site_id= $data['site_id'];
 			// Try to get node in case this is from an error:
@@ -533,6 +536,7 @@ class Register extends Controller {
 		$person = new Person($plc->person);
 
 		$fields['hostname']	= "Hostname";
+		$fields['node_type']	= "Node Type";
 		$fields['model']	= "Model";
 		$fields['method']	= "Method";
 		$fields['ip']		= "IP Address";
@@ -552,8 +556,9 @@ class Register extends Controller {
 		if ( isset($_REQUEST['node_choose']) ) {
 			$rules['node_id']	= "required|intval";
 			$rules['hostname']	= "";
+			$rules['node_type']	= "regular";
 			$rules['model']		= "";
-			$rules['method']	= "";
+			$rules['method']	= "dhcp";
 			$rules['ip']		= "";
 			$rules['netmask']	= "";
 			$rules['network']	= "";
@@ -618,10 +623,11 @@ class Register extends Controller {
 		# TODO: RECODE To update values instead of adding them...
 		global $api, $plc;
 		$hostname = trim($_REQUEST['hostname']);
-		$model= trim($_REQUEST['model']);
+		$model = trim($_REQUEST['model']);
+		$node_type = trim($_REQUEST['node_type']);
 		$node_id = intval($this->validation->node_id);
-		$ret = $api->UpdateNode( $node_id, array('hostname' => $hostname, 
-										  'model' => $model));
+		$optional_vals = array('hostname' => $hostname, 'model' => $model, 'node_type' => $node_type );
+		$ret = $api->UpdateNode( $node_id, $optional_vals);
 		if( $ret <= 0 ) {
 			$data['error'] = $api->error();
 			print $data['error'];

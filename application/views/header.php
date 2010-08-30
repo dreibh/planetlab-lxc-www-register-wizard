@@ -4,9 +4,9 @@
 	<style type="text/css" media="all">@import "https://www.planet-lab.org/misc/drupal.css";</style>
 	<style type="text/css" media="all">@import "https://www.planet-lab.org/sites/default/themes/chameleon/common.css";</style>
 	<style type="text/css" media="all">@import "https://www.planet-lab.org/sites/default/themes/chameleon/planetlab/style.css";</style>
-	<link rel="shortcut icon" 
-			href="https://www.planet-lab.org/sites/default/themes/chameleon/planetlab/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/misc/favicon.ico" type="image/x-icon" />
 	<style type="text/css" media="all">@import "/registerwizard/rounded.css";</style>
+	<style type="text/css" media="all">@import "/registerwizard/wizard.css";</style>
 	<script src="/registerwizard/rounded.js"></script>
 </head>
 <body>
