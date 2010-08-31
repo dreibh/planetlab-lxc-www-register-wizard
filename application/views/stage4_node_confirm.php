@@ -1,4 +1,6 @@
 <?php
+require_once 'plc_functions.php';
+
 if( isset($errors) && count($errors) > 0 )
 {
   print( "<p><strong>The following errors occured:</strong>" );
@@ -15,6 +17,7 @@ function initNodeTypeFields() {
   var regular=document.getElementById("regular_checked");
   var reservable=document.getElementById("reservable_checked");
   if ( regular.checked || reservable.checked) return;
+  window.console.log('initNodeTypeFields is setting regular mode');
   regular.checked=true;
 }
 function updateMethodFields() {
@@ -56,13 +59,13 @@ next stage.  Otherwise, please Update the information as appropriate.
 			</table>
 	</form>
 </div>
+
 <br>
 <div class="plroundedupdate">
 <?= form_open("register/stage4_confirmnode/$pcu_id/$site_id/$node_id", array('name'=>'fm', 'method'=>'post')) ?>
 		<table border=0 cellpadding=3>
 			<tbody>
-		<tr><td colspan='2'>
-		</td></tr>
+		<tr><td colspan='2'> </td></tr>
 		<?php if ( !empty($site) ) 
 			{ ?>
 					<tr><th>Site: </th><td> <?= $site['name'] ?> </td>
@@ -79,9 +82,9 @@ next stage.  Otherwise, please Update the information as appropriate.
 					<th valign='top' width="200">Node Type</th>
 					<td>
 						<input type="radio" name="node_type" value="regular" id="regular_checked"
-						<?= ( $this->validation->node_type == 'regular' ? "checked" : "" ) ?>>regular 
+						<?= ( $node->node_type == 'regular' ? "checked" : "" ) ?>>regular 
 						<input type="radio" name="node_type" value="reservable" id="reservable_checked"
-						<?= ( $this->validation->node_type == 'reservable' ? "checked" : "" ) ?>>reservable 
+						<?= ( $node->node_type == 'reservable' ? "checked" : "" ) ?>>reservable 
 					</td>
 				</tr>
 				<tr>
@@ -97,9 +100,9 @@ next stage.  Otherwise, please Update the information as appropriate.
 					<th valign='top' width="200">Addressing Method</th>
 					<td>
 						<input type="radio" name="method" value="dhcp" id="dhcp_checked" onChange='updateMethodFields()'
-						<?= ( $this->validation->method == 'dhcp' ? "checked" : "" ) ?>>DHCP 
+						<?= ( $node->method == 'dhcp' ? "checked" : "" ) ?>>DHCP 
 						<input type="radio" name="method" value="static" id='static_checked' onChange='updateMethodFields()'
-						<?= ( $this->validation->method == 'static' ? "checked" : "" ) ?>>Static 
+						<?= ( $node->method == 'static' ? "checked" : "" ) ?>>Static 
 					</td>
 				</tr>
 				<tr>

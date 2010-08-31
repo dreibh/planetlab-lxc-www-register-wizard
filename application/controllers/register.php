@@ -37,18 +37,18 @@ class Register extends Controller {
 		$this->validation->set_error_delimiters('<span class="error">', '</span>');
 
 		$rules['model']		= "trim|required";
-		$rules['hostname']  = "trim|required";
+		$rules['hostname']	= "trim|required";
 		$rules['ip'] 		= "trim|required|valid_ip";
-		$rules['username']  = "trim";
-		$rules['password']  = "trim|required";
+		$rules['username']	= "trim";
+		$rules['password']	= "trim|required";
 		$rules['notes'] 	= "trim";
 		$this->validation->set_rules($rules);
 
-		$fields['model']  = "Model";
-		$fields['hostname']  = "Hostname";
+		$fields['model']	= "Model";
+		$fields['hostname']	= "Hostname";
 		$fields['ip'] 		= "IP Address";
-		$fields['username']  = "Username";
-		$fields['password']  = "Password";
+		$fields['username']	= "Username";
+		$fields['password']	= "Password";
 		$this->validation->set_fields($fields);
 
 		$person = new Person($plc->person);
@@ -75,12 +75,12 @@ class Register extends Controller {
 		/* add pcu, get pcu info */
 		$site_id = intval( $_REQUEST['site_id'] );
 		$fields= array( 'protocol'=>	'',
-						'model'=>		$_REQUEST['model'], 
-						'hostname'=>	$this->validation->hostname,
-						'ip'=>			$this->validation->ip,
-						'username'=>	$this->validation->username, 
-						'password'=>	$this->validation->password, 
-						'notes'=>		$_REQUEST['notes'], );
+				'model'=>	$_REQUEST['model'], 
+				'hostname'=>	$this->validation->hostname,
+				'ip'=>		$this->validation->ip,
+				'username'=>	$this->validation->username, 
+				'password'=>	$this->validation->password, 
+				'notes'=>	$_REQUEST['notes'], );
 		$pcu_id= $api->AddPCU( $site_id, $fields );
 
 		if( $pcu_id == 0 ) {
@@ -118,7 +118,7 @@ class Register extends Controller {
 		// get sites depending on role and sites associated.
 		if( $person->isAdmin() ) {
 			$site_info= $api->GetSites(array('peer_id' => NULL,'-SORT'=>'name'), 
-										array( "name", "site_id", "login_base" ) );
+						   array( "name", "site_id", "login_base" ) );
 		} else {
 			$site_info= $api->GetSites( $person->getSites(), array( "name", "site_id", "login_base" ) );
 		}
@@ -188,12 +188,12 @@ class Register extends Controller {
 		/* add pcu, get pcu info */
 		$pcu_id = intval($this->validation->pcu_id);
 		$fields= array( 'protocol'=>	'',
-						'model'=>		$_REQUEST['model'], 
-						'hostname'=>	$this->validation->hostname,
-						'ip'=>			$this->validation->ip,
-						'username'=>	$this->validation->username, 
-						'password'=>	$this->validation->password, 
-						'notes'=>		$_REQUEST['notes'], );
+				'model'=>	$_REQUEST['model'], 
+				'hostname'=>	$this->validation->hostname,
+				'ip'=>		$this->validation->ip,
+				'username'=>	$this->validation->username, 
+				'password'=>	$this->validation->password, 
+				'notes'=>	$_REQUEST['notes'], );
 		$ret = $api->UpdatePCU( $pcu_id, $fields );
 
 		if( $ret != 1 ) {
@@ -244,29 +244,29 @@ class Register extends Controller {
 		$data['site_id'] = intval($site_id);
 
 		if ( isset($_REQUEST['pcu_proceed']) ) {
-			$rules['hostname']  = "";
+			$rules['hostname']	= "";
 			$rules['node_type']     = 'regular';
 			$rules['model']  	= "";
 			$rules['method']  	= "dhcp";
 			$rules['ip'] 		= "";
-			$rules['netmask']  = "";
-			$rules['network']  = "";
-			$rules['gateway']  = "";
-			$rules['broadcast']  = "";
-			$rules['dns1']  = "";
-			$rules['dns2']  = "";
+			$rules['netmask']	= "";
+			$rules['network']	= "";
+			$rules['gateway']	= "";
+			$rules['broadcast']	= "";
+			$rules['dns1']		= "";
+			$rules['dns2']		= "";
 			$this->validation->set_rules($rules);
-			$fields['hostname']  = "Hostname";
+			$fields['hostname']	= "Hostname";
 			$fields['node_type']	= "Node Type";
 			$fields['model']	= "Model";
 			$fields['method']	= "Method";
 			$fields['ip']		= "IP Address";
-			$fields['netmask']		= "Netmask Address";
-			$fields['network']		= "Network Address";
-			$fields['gateway']		= "Gateway Address";
+			$fields['netmask']	= "Netmask Address";
+			$fields['network']	= "Network Address";
+			$fields['gateway']	= "Gateway Address";
 			$fields['broadcast']	= "Broadcast Address";
-			$fields['dns1'] 		= "Primary DNS Address";
-			$fields['dns2'] 		= "Secondary DNS Address";
+			$fields['dns1'] 	= "Primary DNS Address";
+			$fields['dns2'] 	= "Secondary DNS Address";
 			$this->validation->set_fields($fields);
 
 			$result = $this->validation->run();
@@ -275,7 +275,8 @@ class Register extends Controller {
 			$this->disp_errors = False;
 			print $this->validation->error_string . "<br>";
 		} else {
-			$rules['hostname']  = "trim|required";
+			$rules['hostname']	= "trim|required";
+			$rules['node_type']	= "required";
 			$rules['model']  	= "trim|required";
 			$rules['method']  	= "required";
 			$rules['ip'] 		= "trim|required|valid_ip";
@@ -297,16 +298,17 @@ class Register extends Controller {
 			}
 			$this->validation->set_rules($rules);
 
-			$fields['hostname']  = "Hostname";
+			$fields['hostname']	= "Hostname";
+			$fields['node_type']	= "Node Type";
 			$fields['model']	= "Model";
 			$fields['method']	= "Method";
 			$fields['ip']		= "IP Address";
-			$fields['netmask']		= "Netmask Address";
-			$fields['network']		= "Network Address";
-			$fields['gateway']		= "Gateway Address";
+			$fields['netmask']	= "Netmask Address";
+			$fields['network']	= "Network Address";
+			$fields['gateway']	= "Gateway Address";
 			$fields['broadcast']	= "Broadcast Address";
-			$fields['dns1'] 		= "Primary DNS Address";
-			$fields['dns2'] 		= "Secondary DNS Address";
+			$fields['dns1'] 	= "Primary DNS Address";
+			$fields['dns2'] 	= "Secondary DNS Address";
 			$this->validation->set_fields($fields);
 
 			if ($this->validation->run() == TRUE)
@@ -328,7 +330,7 @@ class Register extends Controller {
 		global $api, $plc;
 		$hostname = trim($_REQUEST['hostname']);
 		$node_type = trim($_REQUEST['node_type']);
-		$model= trim($_REQUEST['model']);
+		$model = trim($_REQUEST['model']);
 		$method = trim($_REQUEST['method']);
 		$ip = trim($_REQUEST['ip']);
 		if ( $method == 'static' )
@@ -357,10 +359,9 @@ class Register extends Controller {
 			}
 		}
 
-		if( !isset($errors) || count($errors) == 0 )
-		{
+		if( !isset($errors) || count($errors) == 0 ) {
 			// add new node and its network
-		  $optional_vals= array( 'hostname'=>$hostname, 'node_type'=>$node_type, 'model'=>$model );
+			$optional_vals= array( 'hostname'=>$hostname, 'node_type'=>$node_type, 'model'=>$model );
 
 			$site_id= $data['site_id'];
 			// Try to get node in case this is from an error:
@@ -424,8 +425,6 @@ class Register extends Controller {
 		    $data['error'] = $errors[0];
 			return 0;
 		}
-
-
 		
 	}
 
@@ -543,10 +542,10 @@ class Register extends Controller {
 		$fields['netmask']	= "Netmask Address";
 		$fields['network']	= "Network Address";
 		$fields['gateway']	= "Gateway Address";
-		$fields['broadcast']= "Broadcast Address";
+		$fields['broadcast']	= "Broadcast Address";
 		$fields['dns1'] 	= "Primary DNS Address";
 		$fields['dns2'] 	= "Secondary DNS Address";
-		$fields['node_id']  = "NODE id";
+		$fields['node_id']	= "NODE id";
 		$this->validation->set_fields($fields);
 
 		$data = array();
@@ -574,12 +573,12 @@ class Register extends Controller {
 			$this->disp_errors = False;
 			print $this->validation->error_string . "<br>";
 		} else {
-			$rules['hostname']  = "trim|required";
+			$rules['hostname']	= "trim|required";
+			$rules['node_type']	= 'required';
 			$rules['model']  	= "trim|required";
 			$rules['method']  	= "required";
 			$rules['ip'] 		= "trim|required|valid_ip";
-			if ( isset ($_REQUEST['method']) && $_REQUEST['method'] == 'static' )
-			{
+			if ( isset ($_REQUEST['method']) && $_REQUEST['method'] == 'static' ) {
 				$rules['netmask']  = "trim|valid_ip";
 				$rules['network']  = "trim|valid_ip";
 				$rules['gateway']  = "trim|valid_ip";
@@ -606,8 +605,7 @@ class Register extends Controller {
 		}
 		$data['node_id'] = intval($this->validation->node_id);
 		$data['stage'] = 4;
-		if ( $this->checknodeid($data['node_id']) )
-		{
+		if ( $this->checknodeid($data['node_id']) ) {
 			$data = $this->get_stage4_data($person, $data);
 			$this->load->view('header', $data);
 			$this->load->view('debug', $data);
@@ -623,8 +621,8 @@ class Register extends Controller {
 		# TODO: RECODE To update values instead of adding them...
 		global $api, $plc;
 		$hostname = trim($_REQUEST['hostname']);
-		$model = trim($_REQUEST['model']);
 		$node_type = trim($_REQUEST['node_type']);
+		$model = trim($_REQUEST['model']);
 		$node_id = intval($this->validation->node_id);
 		$optional_vals = array('hostname' => $hostname, 'model' => $model, 'node_type' => $node_type );
 		$ret = $api->UpdateNode( $node_id, $optional_vals);
@@ -634,8 +632,7 @@ class Register extends Controller {
 		}
 
 		$api_node_list = $api->GetNodes($node_id);
-		if ( count($api_node_list) > 0 )
-		{
+		if ( count($api_node_list) > 0 ) {
 			$node_obj = new Node($api_node_list[0], True);
 		} else {
 			print "broken!!!";
@@ -657,11 +654,11 @@ class Register extends Controller {
 
 		// used to generate error strings for static fields only
 		$static_fields= array();
-		$static_fields['netmask']= "Netmask address";
-		$static_fields['network']= "Network address";
-		$static_fields['gateway']= "Gateway address";
-		$static_fields['broadcast']= "Broadcast address";
-		$static_fields['dns1']= "Primary DNS address";
+		$static_fields['netmask']	= "Netmask address";
+		$static_fields['network']	= "Network address";
+		$static_fields['gateway']	= "Gateway address";
+		$static_fields['broadcast']	= "Broadcast address";
+		$static_fields['dns1']		= "Primary DNS address";
 
 		if ( $method == 'static' )
 		{
@@ -705,7 +702,7 @@ class Register extends Controller {
 
 			if ( count($optional_vals) > 0 )
 			{
-				print_r($optional_vals);
+			  // print_r($optional_vals);
 				$ret = $api->UpdateInterface( $node_obj->interface_id, $optional_vals);
 				if( $ret <= 0 ) {
 					$data['error'] = $api->error();
