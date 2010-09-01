@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.3
-%define taglevel 3
+%define taglevel 4
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Wed Sep 01 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-4
+- can set node as reservable at node-creation time
+
 * Wed Apr 21 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-3
 - previous tag had gone bad
 - + stephen's tweaks for f12
