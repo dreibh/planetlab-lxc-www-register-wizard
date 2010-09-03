@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="/misc/favicon.ico" type="image/x-icon" />
 	<style type="text/css" media="all">@import "/registerwizard/rounded.css";</style>
 	<style type="text/css" media="all">@import "/registerwizard/wizard.css";</style>
+	<style type="text/css" media="all">@import "/planetlab/css/plc_style.css";</style>
 	<script src="/registerwizard/rounded.js"></script>
 </head>
 <body>
