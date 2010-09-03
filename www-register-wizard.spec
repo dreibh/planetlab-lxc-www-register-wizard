@@ -5,7 +5,7 @@
 
 %define name www-register-wizard
 %define version 4.3
-%define taglevel 4
+%define taglevel 5
 
 %define release %{taglevel}%{?pldistro:.%{pldistro}}%{?date:.%{date}}
 
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 /var/www/html/registerwizard
 
 %changelog
+* Fri Sep 03 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-5
+- use plc_style for consistent rendering of input fields
+
 * Wed Sep 01 2010 Thierry Parmentelat <thierry.parmentelat@sophia.inria.fr> - www-register-wizard-4.3-4
 - can set node as reservable at node-creation time
 
